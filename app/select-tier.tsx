@@ -80,7 +80,7 @@ const SelectTierScreen = () => {
       <TouchableOpacity
         style={[styles.nextButton, selectedTier === null && styles.disabledButton]}
         disabled={selectedTier === null}
-        onPress={() => router.push("/next-step")}
+        onPress={() => router.push("/home-consultation")}
         accessibilityRole="button"
         accessibilityState={{ disabled: selectedTier === null }}
       >
