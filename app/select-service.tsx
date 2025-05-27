@@ -7,12 +7,18 @@ const SelectService = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
-  const handleSelect = (type) => {
+  const handleSelect = async (type) => {
     if (type === 'move') {
       setShowModal(true);
     } else {
       setSelectedOption(type);
-      setTimeout(() => router.push('/select-tier'), 200); // simulate slight delay for visual feedback
+      try {
+        const res = await fetch("https://tucc-api.vercel.app/api/create-room");
+        const { url } = await res.json();
+        router.push({ pathname: '/home-consultation', params: { url } });
+      } catch (err) {
+        alert("Something went wrong. Please try again.");
+      }
     }
   };
 
@@ -62,8 +68,8 @@ const SelectService = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-   justifyContent: 'flex-start',
-   paddingTop: 80,
+    justifyContent: 'flex-start',
+    paddingTop: 80,
     padding: 24,
     backgroundColor: '#F9F9FB',
   },
